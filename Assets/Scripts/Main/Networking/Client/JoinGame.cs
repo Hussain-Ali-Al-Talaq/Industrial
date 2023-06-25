@@ -19,7 +19,7 @@ public class JoinGame : NetworkBehaviour
 
         JoinAllocation allocation = await RelayService.Instance.JoinAllocationAsync(JoinCode);
 
-        unityTransport.SetHostRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData);
+        unityTransport.SetClientRelayData(allocation.RelayServer.IpV4,(ushort)allocation.RelayServer.Port,allocation.AllocationIdBytes,allocation.Key,allocation.ConnectionData,allocation.HostConnectionData);
 
         NetworkManager.Singleton.StartClient();
         

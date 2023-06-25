@@ -36,14 +36,17 @@ public class CreateGame : NetworkBehaviour
     private void SceneManager_OnLoad(ulong clientId, string sceneName, LoadSceneMode loadSceneMode, AsyncOperation asyncOperation)
     {
         Debug.Log("Scene Loading");
+        NetworkManager.SceneManager.OnLoad -= SceneManager_OnLoad;
     }
 
     private void SceneManager_OnLoadComplete(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)
     {
         Debug.Log("Scene Loaded");
+        NetworkManager.SceneManager.OnLoadComplete -= SceneManager_OnLoadComplete;
     }
     private void SceneManager_OnLoadEventCompleted(string sceneName, LoadSceneMode loadSceneMode, System.Collections.Generic.List<ulong> clientsCompleted, System.Collections.Generic.List<ulong> clientsTimedOut)
     {
         Debug.Log("Done");
+        NetworkManager.SceneManager.OnLoadEventCompleted -= SceneManager_OnLoadEventCompleted;
     }
 }
