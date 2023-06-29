@@ -5,7 +5,8 @@ public static class Noise {
 
 	public enum NormalizeMode {Local, Global};
 
-	public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, NoiseSettings settings, Vector2 sampleCentre) {
+	public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, NoiseSettings settings) {
+
 		float[,] noiseMap = new float[mapWidth,mapHeight];
 
 		System.Random prng = new System.Random (settings.seed);
@@ -16,8 +17,8 @@ public static class Noise {
 		float frequency = 1;
 
 		for (int i = 0; i < settings.octaves; i++) {
-			float offsetX = prng.Next (-100000, 100000) + settings.offset.x + sampleCentre.x;
-			float offsetY = prng.Next (-100000, 100000) - settings.offset.y - sampleCentre.y;
+			float offsetX = prng.Next (-100000, 100000) + settings.offset.x ;
+			float offsetY = prng.Next (-100000, 100000) - settings.offset.y ;
 			octaveOffsets [i] = new Vector2 (offsetX, offsetY);
 
 			maxPossibleHeight += amplitude;

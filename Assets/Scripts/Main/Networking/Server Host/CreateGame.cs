@@ -19,11 +19,13 @@ public class CreateGame : NetworkBehaviour
         unityTransport = FindObjectOfType<UnityTransport>();
 
         Allocation allocation = await RelayService.Instance.CreateAllocationAsync(MaxPlayers);
-        Debug.Log(await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId));
-
+        string JoinCode  = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+        Debug.Log(JoinCode);
         unityTransport.SetHostRelayData(allocation.RelayServer.IpV4, (ushort)allocation.RelayServer.Port, allocation.AllocationIdBytes, allocation.Key, allocation.ConnectionData);
 
         NetworkManager.Singleton.StartHost();
+
+        SceneManager.instence.JoinCode = new NetworkVariable<FixedString32Bytes>(JoinCode, NetworkVariableReadPermission.Owner, NetworkVariableWritePermission.Server);
 
         NetworkManager.SceneManager.OnLoad += SceneManager_OnLoad;
         NetworkManager.SceneManager.OnLoadComplete += SceneManager_OnLoadComplete;
